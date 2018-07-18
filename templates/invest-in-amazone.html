@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title> {{ data }} - AI Monkey</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+
+	<!-- Font Awesome 4.7.0   -->
+	<link href="{{ url_for('static', filename = 'css/font-awesome.css') }}" rel="stylesheet">
+
+	<!-- Loader -->
+	<link href="{{ url_for('static', filename = 'css/loader.css') }}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ url_for('static', filename = 'css/big.css') }}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ url_for('static', filename = 'css/fab.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark  fixed-bottom">
+		<div class="container">
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<div class="fab" style="right: 0">
+					<span class="fab-action-button text-center" onclick="go_home()">
+						<i class="fa fa-home" style="font-size: 30px; color: #ffff; padding-left: -20px; padding-top: 10px;"></i>
+					</span>
+
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<section>
+		<div class="container" style="margin-top: 150px;">
+			<div class="row">
+				<div id="about-stock" class="col-lg-9" style="color: #ffffff;">
+					<h1 class="main-stock-market text-white">{{ data }}</h1>
+					<div class="amazon" style="margin-top: 50px;">
+						<h3 id="we-want">We want you to invest in Amazon</h3>
+						<div class="text-center">
+							<div id="{{ids[0]}}" style="height: 450px; width: 600px;"></div>
+						</div>
+						<p id="amazon-stock-market"  class="lead">According to our prediction we want you to invest in Amazon as a long term investment. We predicted amazon share will increase in coming year.</p>	
+						<br>
+					</div>
+				</div>
+
+
+
+				<div class="col-lg-3" style="right:120; margin-top: 150px;">
+					<div class="lds-ripple" ><div></div><div></div></div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/jquery-3.3.1.slim.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+
+	<!-- D3.js -->
+  <script src="{{ url_for('static', filename = 'js/d3.min.js') }}"></script>
+  <!-- Plotly.js -->
+  <script src="{{ url_for('static', filename = 'js/plotly-basic.js') }}"></script>
+	
+	<script type="text/javascript">
+		var graphs = {{graphJSON | safe}};
+    console.log(graphs);
+    var ids = {{ids | safe}};
+
+    for(var i in graphs) {
+      Plotly.plot(ids[i], // the ID of the div, created above
+        					graphs[i].data,
+                  graphs[i].layout || {});
+    }
+
+    </script>
+
+
+	<script type="text/javascript">
+
+		function go_home(){
+			window.location.href = "/";
+		}
+		
+		// Before we start investing	
+		function invest_in_amazon() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#we-want');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				amazon_prediction();
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+		// Before we start investing	
+		function amazon_prediction() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#amazon-stock-market');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+		invest_in_amazon();
+		
+
+
+
+	</script>
+
+</body>
+
+</html>

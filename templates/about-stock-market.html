@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title> {{ data }} - AI Monkey</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+
+	<!-- Font Awesome 4.7.0   -->
+	<link href="{{ url_for('static', filename = 'css/font-awesome.css') }}" rel="stylesheet">
+
+	<!-- Loader -->
+	<link href="{{ url_for('static', filename = 'css/loader.css') }}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ url_for('static', filename = 'css/big.css') }}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ url_for('static', filename = 'css/fab.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark  fixed-bottom">
+		<div class="container">
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<div class="fab" style="right: 0">
+					<span class="fab-action-button text-center" onclick="go_home()">
+						<i class="fa fa-home" style="font-size: 30px; color: #ffff; padding-left: -20px; padding-top: 10px;"></i>
+					</span>
+
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<section>
+		<div class="container" style="margin-top: 150px;">
+			<div class="row">
+				<div id="about-stock" class="col-lg-9" style="color: #ffffff;">
+					<h1 class="main-stock-market">{{ data }}</h1>
+					<p id="think-stock-market">Before you think about stock market. Let us know what is stock market ? </p>
+					<p id="stock-market" class="lead">The stock market refers to the collection of markets and exchanges where the issuing and trading of equities or stocks of publicly held companies, bonds, and other classes of securities take place. Also known as the equity market.</p>
+					<br><br>
+					<div id="intrested">
+						<h2 id="intrest-in-stock-market">Are you intrested in investing stock market</h2>
+						<button type="button" onclick="choice_of_investment()" class="btn btn-outline-primary">Yes</button>
+						<button type="button" id="btn-no" class="btn btn-outline-info" style="margin-left: 20px;">No</button>
+					</div>
+					
+				</div>
+
+				<div id="choice-of-investment" class="col-lg-9" style="color: #ffffff;">
+					<h1 class="main-stock-market">{{ data }}</h1>
+					<p id="types-of-investment">Let us know about types of investment:</p>
+					<div id="long-term-investment">
+						<p>Long-term Investment</p>
+						<p id="about-logterm" class="lead">These investment is an account on the asset side of a company's balance sheet that represents the company's investments, including stocks, bonds, real estate and cash, that it intends to hold for more than a year.</p>
+					</div>
+					<br>
+					<div id="short-term-investment">
+						<p>Short-term Investment</p>
+						<p id="about-logterm" class="lead">These investments are also known as temporary investments. These typically include marketable equity and debt securities as well as short-term paper. Since the investments are very liquid, it is typically right below the cash and equivalents on a company's balance sheet.</p>
+					</div>
+				</div>
+
+
+				<div class="col-lg-3" style="right:120; margin-top: 150px;">
+					<div class="lds-ripple" ><div></div><div></div></div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/jquery-3.3.1.slim.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+
+
+	<script type="text/javascript">
+		document.getElementById("intrested").style.display = "none";
+		document.getElementById('stock-market').style.display = "none";
+		document.getElementById('choice-of-investment').style.display = 'none';
+
+		function go_home(){
+			window.location.href = "/";
+		}
+		
+		// Before we start investing	
+		function think_stock_market() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#think-stock-market');
+			//console.log(input.textContent);
+			speech.text = content.textContent;
+
+			var  time;
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				document.getElementById('stock-market').style.display = "";
+				stock_market();
+
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+		//About Stock market
+		function stock_market() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#stock-market');
+			//console.log(input.textContent);
+			speech.text = content.textContent;
+
+			var  time;
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				document.getElementById("intrested").style.display = "";
+				interest_in_market();
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+		//Are you intrested in investing stock market
+		function interest_in_market() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			
+			var content = document.querySelector('#intrest-in-stock-market');
+			speech.text = content.textContent;
+
+			var  time;
+			console.log(speech);
+			speech.onstart = function (event) {};
+
+			speech.onend = function (event) {};
+
+			speechSynthesis.speak(speech);
+		}
+
+		 //call the first script
+		//All about stock market
+		think_stock_market();
+
+
+
+
+		function choice_of_investment(){
+			document.getElementById("about-stock").style.display = "none";
+			document.getElementById('choice-of-investment').style.display = '';
+
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			
+			var content = document.querySelector('#types-of-investment');
+			speech.text = content.textContent;
+
+			var  time;
+			console.log(speech);
+			speech.onstart = function (event) {};
+
+			speech.onend = function (event) {
+				long_term_investment();
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+
+		function long_term_investment() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			
+			var content = document.querySelector('#long-term-investment');
+			speech.text = content.textContent;
+
+			var  time;
+			console.log(speech);
+			speech.onstart = function (event) {};
+
+			speech.onend = function (event) {
+				short_term_investment();
+			};
+
+			speechSynthesis.speak(speech); 
+		}
+
+
+
+
+		function short_term_investment() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			
+			var content = document.querySelector('#short-term-investment');
+			speech.text = content.textContent;
+
+			var  time;
+			console.log(speech);
+			speech.onstart = function (event) {};
+
+			speech.onend = function (event) {
+
+			};
+
+			speechSynthesis.speak(speech); 
+		}
+
+
+
+
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+
+
+		// async function text_to_speech() {
+		// 	//interest_in_market();
+			
+		// 	//stock_market();
+
+		// 	await sleep(20000);
+		// 	console.log('20 second later');
+		// 	//interest_in_market();
+
+
+		// }
+
+		//text_to_speech();
+		
+
+
+
+	</script>
+
+</body>
+
+</html>

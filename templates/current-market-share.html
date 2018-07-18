@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title> {{ data }} - AI Monkey</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+
+	<!-- Font Awesome 4.7.0   -->
+	<link href="{{ url_for('static', filename = 'css/font-awesome.css') }}" rel="stylesheet">
+
+	<!-- Loader -->
+	<link href="{{ url_for('static', filename = 'css/loader.css') }}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ url_for('static', filename = 'css/big.css') }}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ url_for('static', filename = 'css/fab.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark  fixed-bottom">
+		<div class="container">
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<div class="fab" style="right: 0">
+					<span class="fab-action-button text-center" onclick="go_home()">
+						<i class="fa fa-home" style="font-size: 30px; color: #ffff; padding-left: -20px; padding-top: 10px;"></i>
+					</span>
+
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<section>
+		<div class="container" style="margin-top: 150px;">
+			<h1 class="main-stock-market text-white">{{ data }}</h1>
+			<p id="think-stock-market" class="text-white">Below are the market share of top companies</p>
+			<div class="row google-row">
+				<div id="about-stock" class="col-lg-9" style="color: #ffffff;">
+					<div class="google" style="margin-top: 50px;">
+						<h3 id="google-heading">Google past three year graph</h3>
+						<div class="text-center">
+					    <div id="{{ids[0]}}" style="height: 450px; width: 600px;"></div>
+							<!-- <img class="md-offset-6 col-md-6" src="" height="270" /> -->
+						</div>
+						<p id="google-stock-market"  class="lead">Google past three years market share, in the end of year 2015 google had a increase 50 percent. In the end of year 2016 their was increase of 30 precent and in the end of year 2017 their was increase of 60 percent.</p>	
+						<br>
+					</div>
+
+				</div>
+
+				<div class="col-lg-3" style="right:120; margin-top: 150px;">
+					<div class="lds-ripple" ><div></div><div></div></div>
+				</div>
+
+			</div>
+
+
+
+
+
+			<div class="row" id="amazon-row">
+				<div id="about-stock" class="col-lg-9" style="color: #ffffff;">
+					
+					<div class="amazon" style="margin-top: 50px;">
+						<h3 id="amazon-heading">Amazon past three year graph</h3>
+						<div class="text-center">
+							<div id="{{ids[1]}}" style="height: 450px; width: 600px;"></div>
+						</div>
+						<p id="amazon-stock-market"  class="lead">Amazon market share in the end of year 2015 amazon had a increase 20 percent. At the end of year 2016 amazon had increase of 30 precent and in the end of year 2017 amazon had increase of 60 percent.</p>	
+						<br>
+					</div>
+					
+				</div>
+
+
+				<div class="col-lg-3" style="right:120; margin-top: 150px;">
+					<div class="lds-ripple" ><div></div><div></div></div>
+				</div>
+
+			</div>
+
+
+
+			<div class="row" id="microsoft-row">
+				<div id="about-stock" class="col-lg-9" style="color: #ffffff;">
+
+					<div class="microsoft" style="margin-top: 50px;">
+						<h3 id="microsoft-heading">Microsoft past three year graph</h3>
+						<div class="text-center">
+							<div id="{{ids[2]}}" style="height: 450px; width: 600px;"></div>
+						</div>
+						<p id="microsoft-stock-market"  class="lead">Microsoft also had a great market share in past three years. Market share in the end of year 2015 microsoft had a increase 10 percent. At the end of year 2016 microsoft had increase of 30 precent and in the end of year 2017 microsoft had increase of 50 percent.</p>	
+						<br>
+					</div>
+					
+				</div>
+
+
+
+				<div class="col-lg-3" style="right:120; margin-top: 150px;">
+					<div class="lds-ripple" ><div></div><div></div></div>
+				</div>
+
+
+
+			</div>
+
+
+		</div>
+
+
+
+
+
+
+
+	</section>
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/jquery-3.3.1.slim.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+
+	<!-- D3.js -->
+  <script src="{{ url_for('static', filename = 'js/d3.min.js') }}"></script>
+  <!-- Plotly.js -->
+  <script src="{{ url_for('static', filename = 'js/plotly-basic.js') }}"></script>
+	
+	<script type="text/javascript">
+		var graphs = {{graphJSON | safe}};
+    console.log(graphs);
+    var ids = {{ids | safe}};
+
+    for(var i in graphs) {
+      Plotly.plot(ids[i], // the ID of the div, created above
+        					graphs[i].data,
+                  graphs[i].layout || {});
+    }
+
+    </script>
+
+
+
+	<script type="text/javascript">
+		document.getElementById("amazon-row").style.display = "none";
+		document.getElementById("microsoft-row").style.display = "none";
+
+		function go_home(){
+			window.location.href = "/";
+		}
+		
+		// Before we start investing	
+		function think_stock_market() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#think-stock-market');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				
+				google_heading();
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+		think_stock_market();
+
+
+		
+		function google_heading() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#google-heading');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				
+				google_stock_info();
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+
+
+
+		function google_stock_info() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#google-stock-market');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {};
+
+			speech.onend = function (event) {
+				document.getElementById("amazon-row").style.display = "";
+				amazon_heading();
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+
+		function amazon_heading() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#amazon-heading');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				
+				amazon_stock_info();
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+		function amazon_stock_info() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#amazon-stock-market');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				document.getElementById("microsoft-row").style.display = "";
+				microsoft_heading();
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+
+
+		function microsoft_heading() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#microsoft-heading');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				
+				microsoft_stock_info();
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+		function microsoft_stock_info() {
+			speechSynthesis.cancel()
+			var speech = new SpeechSynthesisUtterance();
+			//u.text = 'This is umer please dont come here';
+
+			var content = document.querySelector('#microsoft-stock-market');
+			console.log(content.textContent);
+			speech.text = content.textContent;
+
+			console.log(speech);
+			speech.onstart = function (event) {
+				
+			};
+
+			speech.onend = function (event) {
+				
+
+				
+			};
+
+			speechSynthesis.speak(speech);
+		}
+
+
+	</script>
+
+</body>
+
+</html>

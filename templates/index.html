@@ -1,0 +1,176 @@
+<!doctype html>	
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ url_for('static', filename = 'css/new-age.css') }}" rel="stylesheet">
+
+	<!-- Font Awesome 4.7.0   -->
+	<link href="{{ url_for('static', filename = 'css/font-awesome.css') }}" rel="stylesheet">
+
+	<!-- Loader -->
+	<link href="{{ url_for('static', filename = 'css/loader.css') }}" rel="stylesheet">
+
+	<title>AI Monkey</title>	
+</head>
+<body>
+	<header class="masthead" style="background: url(static/img/aimonkey_bg.png)">
+		<div class="container">
+			<div class="row h-100">
+				<div class="col-lg-12">
+					<div class="header-content mx-auto">
+              <!-- <h1 class="mb-5" style="color: #2c2c2c;">New Age is an app</h1>
+              	<a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Start Now for Free!</a>-->
+              <form action="/search" method="POST">
+              <div class="row justify-content-md-center">
+              	<div class="col-md-auto">
+              		<div class="text-center" style="margin-top: 180px; margin-bottom: 70px;">
+										  
+											<img src="static/img/aimonkey.png" class="img-responsive" height="100" style="margin-top: -20px;"> <spna class="lead text-white" style="font-size: 50px;"> AI Monkey</spna>
+
+										</div>
+              		<div class="input-group ">
+              			
+              			<div class="input-group input-group-lg mb-3">
+              				
+              				<input type="text" id="search_query" name="search_query" class="form-control" style="min-width: 700px;" placeholder="Search or enter url" aria-describedby="basic-addon2">
+
+              				<div class="input-group-append">
+              					<span onclick="allow_mic()" class="input-group-text bg-white" id="basic-addon2"><i class="fa fa-microphone bg-white" aria-hidden="true"></i></span>
+
+              					<button class="btn btn-outline-secondary btn-go" type="submit">GO</button>
+              				
+              				</div>
+              			</div>
+              			<!-- <div class="lds-ripple"><div></div><div></div></div> -->
+              		</div>
+              	</div>
+              </div>
+            </form>
+            </div>
+          </div>
+
+          <div class="col-lg-5 my-auto">
+          	<div class="device-container">
+          		<div class="device-mockup iphone6_plus portrait white">
+          			<div class="device">
+          				<div class="screen">
+          					<!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+          					<!-- <img src="img/demo-screen-1.jpg" class="img-fluid" alt=""> -->
+          				</div>
+          				<div class="button">
+          					<!-- You can hook the "home button" to some JavaScript events or just remove it -->
+          				</div>
+          			</div>
+          		</div>
+          	</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery-3.3.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+    <!--<script>document.write(process.versions.node)</script>
+		<script>document.write(process.versions.chrome)</script>
+		<script>document.write(process.versions.electron)</script>-->
+
+		<script>
+      // You can also require other files to run in this process
+      //require('../client/renderer.js')
+      
+
+      
+
+
+    </script>
+
+    <script type="text/javascript">
+    	speechSynthesis.cancel();
+    	
+    	function allow_mic() {
+    		
+    		window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+					const recognition = new SpeechRecognition();
+
+					recognition.interimResults = true;
+
+					// let p = document.createElement('p');
+
+
+
+					//const words = document.querySelector('#search_query');
+					
+
+					// words.appendChild(p);
+
+
+				recognition.start();
+
+				recognition.addEventListener('result', e => {
+				console.log(e.results);
+
+				const transcript = Array.from(e.results)
+				.map(result => result[0])
+				.map(result => result.transcript)
+				.join('')
+
+				document.getElementById("search_query").value = transcript;
+				
+				// p.textContent = transcript;
+
+				// if (e.results[0].isFinal) {
+				// 	 p = document.createElement('p');
+
+				// 	 words.appendChild(p);
+				// }
+
+
+
+				// if(transcript.includes("stock market")){
+				// 	alert("You want to search about stock market");
+				// }
+
+				console.log(transcript);
+
+			});
+
+
+					recognition.addEventListener('end', recognition.start);
+
+
+
+    	}
+
+
+
+
+    	// $(document).ready(function () {
+    	// 	$('.btn-go').click(function () {
+    	// 		var search_query = $('#search_query').val();
+
+    	// 		console.log(search_query);
+
+    	// 	});
+
+    	// });
+
+
+    </script>
+
+
+
+  </body>
+  </html>

@@ -1,0 +1,67 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ url_for('static', filename = 'css/new-age.css') }}" rel="stylesheet">
+
+	<!-- Font Awesome 4.7.0   -->
+	<link href="{{ url_for('static', filename = 'css/font-awesome.css') }}" rel="stylesheet">
+
+	<!-- Loader -->
+	<link href="{{ url_for('static', filename = 'css/loader.css') }}" rel="stylesheet">
+
+	<title>{{ data.search_query }} - AI Monkey</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="ai-search-box row card">
+			<div class="col-md-7" style="position: absolute; margin-top: 10px;">
+				<input type="text" id="search_query" value="{{ data.search_query }}" name="search_query" class="form-control" style="min-width: 500px; min-height: 60px; font-size: 20px;" placeholder="Search or enter url" aria-describedby="basic-addon2">	
+			</div>
+		</div>
+	</div>
+
+	<div class="container" style="margin-top:120px;">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="google-card">
+					
+					<div class="text-center" style="width: 18rem;">
+						<img class="img-responsive img-circle" height="250" width="250" src="static/img/google.png" >
+						<div class="card-body text-center">
+							<a href="#" class="btn btn-primary">Go Google</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="google-card">
+					<div class="text-center" style="width: 18rem;">
+						<img class="img-responsive img-circle" src="static/img/aimonkey_ui.png" alt="Card image cap">
+						
+						<div class="card-body text-center">
+							<a href="/ai-monkey-search/{{ data.search_query }}" class="btn btn-primary">Go AI Monkey</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/jquery-3.3.1.slim.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+</body>
+</html>
